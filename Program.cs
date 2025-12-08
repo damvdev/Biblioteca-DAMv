@@ -17,9 +17,9 @@ namespace BibliotecaDemo
             Console.WriteLine();
 
             // Afegir alguns llibres de prova
-            AfegirLlibre("El Quixot", "Cervantes", 1605);
-            AfegirLlibre("1984", "Orwell", 1949);
-            AfegirLlibre("", "", 0); // ERROR: dades buides permeses
+            AfegirLlibre(ref titols, ref autors, ref anys, ref comptador, "El Quixot", "Cervantes", 1605);
+            AfegirLlibre(ref titols, ref autors, ref anys, ref comptador, "1984", "Orwell", 1949);
+            AfegirLlibre(ref titols, ref autors, ref anys, ref comptador, "", "", 0); // ERROR: dades buides permeses
 
             while (!sortir)
             {
@@ -31,7 +31,6 @@ namespace BibliotecaDemo
 
             Console.WriteLine("Adéu!");
         }
-
 
         static void MostrarMenu()
         {
@@ -48,13 +47,13 @@ namespace BibliotecaDemo
         {
             if (opcio == "1")
             {
-                MostrarTotesLlibres();
+                MostrarTotesLlibres(titols, autors, anys, comptador);
             }
             else if (opcio == "2")
             {
                 Console.Write("Introdueix el títol a cercar: ");
                 string titol = Console.ReadLine();
-                int posicio = CercarLlibre(titol);
+                int posicio = CercarLlibre(titols, comptador, titol);
 
                 if (posicio >= 0)
                 {
@@ -75,14 +74,13 @@ namespace BibliotecaDemo
                 Console.Write("Autor: ");
                 string autor = Console.ReadLine();
                 Console.Write("Any: ");
+                int any = int.Parse(Console.ReadLine()); // ERROR: sense validació
 
-                int any = int.Parse(Console.ReadLine());
-
-                AfegirLlibre(titol, autor, any);
+                AfegirLlibre(ref titols, ref autors, ref anys, ref comptador, titol, autor, any);
             }
             else if (opcio == "4")
             {
-                MostrarEstadistiques();
+                MostrarEstadistiques(titols, autors, anys, comptador);
             }
             else if (opcio == "5")
             {
